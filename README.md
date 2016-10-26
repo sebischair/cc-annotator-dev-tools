@@ -1,2 +1,2 @@
 # cc-annotator
-Clean code annotator is an Atom package providing UI for CleanCode annotation backend service
+Clean code annotator (cc-annotator) is an Atom package providing UI for CleanCode backend service
