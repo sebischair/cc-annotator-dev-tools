@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    "atom-text-editor": [
+      {
+        "label": "Annotate File",
+        "command": "annotator:annotate"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Packages",
+      "submenu": [
+        {
+          "label": "annotator",
+          "submenu": [
+            {
+              "label": "Annotate File",
+              "command": "annotator:annotate"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
