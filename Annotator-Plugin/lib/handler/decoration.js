@@ -1,5 +1,7 @@
 'use babel';
 
+fs = require ('fs-plus')
+
 module.exports =  {
   annotation_line: function(annotation, editoR) {
 
@@ -36,7 +38,28 @@ module.exports =  {
         atom.tooltips.add(marker, {title: "The package version"})
     }
 
-  }
+  },
 
+  annotation_smell (smell, editoR) {
+
+    var path = editoR.getPath()
+    var content = fs.readFileSync(path).toString('utf8')
+
+    var splites = content.split(smell.token)
+    var line_nr_overall = 0
+    for (i = 0; i < splites.length - 1; i ++){
+      var lines = splites[i].split("\n")
+      line_nr_local = lines.length - 1
+      line_nr_overall += line_nr_local
+      var line = lines[line_nr_local]
+      var begin = line.length
+      var end = begin + smell.token.length
+      var range = [[line_nr_overall,begin],[line_nr_overall,end]]
+      var marker = editoR.markBufferRange(range)
+      var decoration_line_nr = editoR.decorateMarker(marker, {type: 'line-number', class: 'line-number-red'})
+      var decoration_token = editoR.decorateMarker(marker, {type: 'highlight', class: 'highlight-red'})
+    }
+
+  }
 
 }

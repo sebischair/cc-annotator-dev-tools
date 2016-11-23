@@ -145,7 +145,6 @@ export default {
 
   /* WEBAPP Praktikum */
   get_range(smell, file_content) {
-    atom.notifications.addInfo("HELLO WORLD")
     atom.notifications.addInfo(JSON.stringify(smell))
     atom.notifications.addInfo(JSON.stringify(file_content))
     var prev_content = file_content.substring(smell.begin)
@@ -179,11 +178,10 @@ export default {
 
             for (var i = 0; i < smells.length; i++){
               var smell = smells[i]
-              get_range(smell, file_content)
+              decoration.annotation_smell(smell, editoR);
             }
       }).catch((err) => {
         console.log("ERROR: "+JSON.stringify(err))
-        atom.notifications.addWarning(err)
       })/**/
 
 
