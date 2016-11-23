@@ -2,8 +2,12 @@
   "context-menu": {
     "atom-text-editor": [
       {
-        "label": "Annotate File",
-        "command": "annotator:annotate"
+        "label": "Annotate Code",
+        "command": "annotator:annotate_code"
+      },
+      {
+        "label": "Annotate Comments",
+        "command": "annotator:annotate_comment"
       }
     ]
   },
@@ -15,8 +19,12 @@
           "label": "annotator",
           "submenu": [
             {
-              "label": "Annotate File",
-              "command": "annotator:annotate"
+              "label": "Annotate Code",
+              "command": "annotator:annotate_code"
+            },
+            {
+              "label": "Annotate Comments",
+              "command": "annotator:annotate_comment"
             }
           ]
         }

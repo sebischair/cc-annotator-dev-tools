@@ -28,7 +28,10 @@ export default {
 
     // Register command that toggles this view
     this.subscriptions.add(atom.commands.add('atom-workspace', {
-      'annotator:annotate': () => this.annotate_smells()
+      'annotator:annotate_code': () => this.annotate_code()
+    }));
+    this.subscriptions.add(atom.commands.add('atom-workspace', {
+      'annotator:annotate_comment': () => this.annotate_comment()
     }));
   },
 
@@ -44,7 +47,7 @@ export default {
     };
   },
 
-  annotate() {
+  annotate_comment() {
     self = this
     let editoR
     if (editoR = atom.workspace.getActiveTextEditor()){
@@ -151,7 +154,7 @@ export default {
     atom.notifications.addInfo(JSON.stringify(line))
   },
 
-  annotate_smells() {
+  annotate_code() {
     self = this
     let editoR
     if (editoR = atom.workspace.getActiveTextEditor()){
@@ -168,7 +171,6 @@ export default {
       }
 
       url_sentiment = "https://spotlight.in.tum.de/processCode"
-      atom.notifications.addInfo("Send request")
       query.sebis_services(url_sentiment, content).then((response) => {
             atom.notifications.addSuccess(response)
 

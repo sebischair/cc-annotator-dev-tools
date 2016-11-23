@@ -5,7 +5,8 @@
   "description": "A short description of your package",
   "keywords": [],
   "activationCommands": {
-    "atom-workspace": "annotator:annotate"
+    "atom-workspace": "annotator:annotate_comment",
+    "atom-workspace": "annotator:annotate_code"
   },
   "repository": "https://github.com/atom/annotator",
   "license": "MIT",
