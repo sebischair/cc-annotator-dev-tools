@@ -59,6 +59,10 @@ export default {
       url_sentiment = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment"
       // No sentiment for German language
       query.ms_services(url_sentiment, content).then((response) => {
+        atom.notifications.addSuccess("1")
+        comment.update_content_sentiment(content, response)
+        overall_sentiment = comment.calc_overall_sentiment(response)
+        /*
         var response_docs = JSON.parse(response).documents
 
         var overall_sentiment = 0;
@@ -69,6 +73,7 @@ export default {
         }
 
         overall_sentiment = overall_sentiment / response_docs.length
+        */
         return overall_sentiment
 
       }).then((sentiment) => {
@@ -89,12 +94,13 @@ export default {
 
       url_key_phrases = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases"
       query.ms_services(url_key_phrases, content).then((response) => {
-        var response_docs = JSON.parse(response).documents
+        comment.update_content_keyphrases(content, response)
+        /*var response_docs = JSON.parse(response).documents
 
         for (var i = 0; i < response_docs.length; i++) {
           content.documents[i].key_phrases = response_docs[i].keyPhrases
           decoration.annotation_key(content.documents[i], self.editoR)
-        }
+        }*/
       }).catch((err) => {
         console.log("ERROR: "+JSON.stringify(err))
       })/**/
@@ -103,33 +109,10 @@ export default {
     }
   },
 
-  update_content_sentiment(content, response) {
-    var response_docs = JSON.parse(response).documents
-    for (var i = 0; i < response_docs.length; i++) {
-      atom.notifications.addSuccess(JSON.stringify(response_docs[i]))
-      atom.notifications.addSuccess(JSON.stringify(content))
-      content.documents[i].score = response_docs[i].score
-      decoration.annotation_line(content.documents[i], self.editoR)
-    }
-  },
-
-  update_content_keyphrases(response) {
-    var response_docs = JSON.parse(response).documents
-
-    for (var i = 0; i < response_docs.length; i++) {
-      self.content.documents[i].key_phrases = response_docs[i].keyPhrases
-      decoration.annotation_key(self.content.documents[i], self.editoR)
-    }
-  },
-
   /* WEBAPP Praktikum */
   get_range(smell, file_content) {
-    atom.notifications.addInfo(JSON.stringify(smell))
-    atom.notifications.addInfo(JSON.stringify(file_content))
     var prev_content = file_content.substring(smell.begin)
-    atom.notifications.addInfo(JSON.stringify(prev_content))
     var line = (prev_content.match(/\n/g) || []).length;
-    atom.notifications.addInfo(JSON.stringify(line))
   },
 
   annotate_code() {

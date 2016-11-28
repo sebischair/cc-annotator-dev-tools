@@ -1,6 +1,7 @@
 'use babel';
 
 fs = require ('fs-plus')
+import decoration from '../handler/decoration';
 
 module.exports =  {
       generate_base_content: function(editoR){
@@ -98,5 +99,36 @@ module.exports =  {
           }
       }
       return documents;
+    },
+
+    update_content_sentiment: function(content, response) {
+      var response_docs = JSON.parse(response).documents
+      for (var i = 0; i < response_docs.length; i++) {
+        content.documents[i].score = response_docs[i].score
+        decoration.annotation_line(content.documents[i], self.editoR)
+      }
+    },
+
+    calc_overall_sentiment: function(response) {
+      var response_docs = JSON.parse(response).documents
+
+      var overall_sentiment = 0;
+      for (var i = 0; i < response_docs.length; i++) {
+        overall_sentiment += response_docs[i].score
+      }
+
+      overall_sentiment = overall_sentiment / response_docs.length
+
+      return overall_sentiment
+    },
+
+    update_content_keyphrases: function(content, response) {
+      var response_docs = JSON.parse(response).documents
+
+      for (var i = 0; i < response_docs.length; i++) {
+        content.documents[i].key_phrases = response_docs[i].keyPhrases
+        decoration.annotation_key(content.documents[i], self.editoR)
+      }
+
     }
 }
