@@ -3,6 +3,7 @@
 import AnnotatorView from './annotator-view';
 import query from './handler/query';
 import decoration from './handler/decoration';
+import comment from './handler/comment';
 import { CompositeDisposable } from 'atom';
 import request from 'request';
 
@@ -53,12 +54,13 @@ export default {
     if (editoR = atom.workspace.getActiveTextEditor()){
 
       self.editoR = editoR
-      var content = self.generate_base_content(editoR);
+      var content = comment.generate_base_content(editoR);
 
       url_sentiment = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment"
+      // No sentiment for German language
       query.ms_services(url_sentiment, content).then((response) => {
-
         var response_docs = JSON.parse(response).documents
+
         var overall_sentiment = 0;
         for (var i = 0; i < response_docs.length; i++) {
           content.documents[i].score = response_docs[i].score
@@ -81,6 +83,8 @@ export default {
 
       }).catch((err) => {
         console.log("ERROR: "+JSON.stringify(err))
+        atom.notifications.addWarning(JSON.stringify(err))
+
       })/**/
 
       url_key_phrases = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases"
@@ -96,31 +100,6 @@ export default {
       })/**/
 
       return
-    }
-  },
-
-  generate_base_content(editoR){
-    var path = editoR.getPath()
-    var file_content = fs.readFileSync(path).toString('utf8')
-    var documents = []
-    var lines = file_content.split("\n")
-
-    for (i = 0; i < lines.length; i ++){
-        if (lines[i].includes("://") || lines[i].includes("\"//\"")){
-          continue;
-        }
-        if (lines[i].includes("//")){
-          documents.push({
-            "language": "en",
-            "id": i,
-            "text": lines[i],
-            "score": 0.5,
-            "key_phrases": []
-          })
-        }
-    }
-    return {
-      documents: documents
     }
   },
 

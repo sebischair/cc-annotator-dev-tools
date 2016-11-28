@@ -10,7 +10,7 @@ module.exports =  {
 
     var range = [[line,0],[line,1]]
     var marker = editoR.markBufferRange(range)
-
+    atom.notifications.addInfo("Marking Line "+line)
     if (score < 0.4) {
         var decoration = editoR.decorateMarker(marker, {type: 'line-number', class: 'line-number-red'})
     } else if (score < 0.6) {
@@ -35,7 +35,7 @@ module.exports =  {
         var range = [[line, start], [line, end]]
         var marker = editoR.markBufferRange(range)
         var decoration = editoR.decorateMarker(marker, {type: 'highlight', class: 'highlight-blue'})
-        atom.tooltips.add(marker, {title: "The package version"})
+        //atom.tooltips.add(marker, {title: "The package version"})
     }
 
   },

@@ -27,12 +27,23 @@ If myCuType <> CU250S_2 Then
     UploadProject ()
 End If
 
+If myCuType <> CU250S_2 Then
+    ' Deactivate function module
+    ActivateFunctionModule ( Extended_setpoint_channel )
+
+    ' Upload project
+    UploadProject ()
+End If
+
+
+
     ' Wait for communication between CU and F-CPU
     WaitforComm ( PROFIsafe )
 
     ' Set the drive object number in S7 project
     S7DriveObject ( myDrive )
 
+wait(10)
 
 ErrorHandler:
 
