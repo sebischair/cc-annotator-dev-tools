@@ -4,6 +4,7 @@ import AnnotatorView from './annotator-view';
 import query from './handler/query';
 import decoration from './handler/decoration';
 import comment from './handler/comment';
+import storage from './handler/storage';
 import { CompositeDisposable } from 'atom';
 import request from 'request';
 
@@ -34,6 +35,8 @@ export default {
     this.subscriptions.add(atom.commands.add('atom-workspace', {
       'annotator:annotate_comment': () => this.annotate_comment()
     }));
+
+    //storage.store_json("/home/akorus/Schreibtisch/.annotator", {'hello':'world','a':[1,2,3,4]})
   },
 
   deactivate() {

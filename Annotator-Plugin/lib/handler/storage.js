@@ -1,11 +1,13 @@
 'use babel';
 
+fs = require ('fs-plus')
+
 module.exports =  {
 
   hashFile: function(path) {
     var file_content = fs.readFileSync(path).toString('utf8');
     return this.createHash(file_content);
-  }
+  },
 
   createHash: function(content){
     const crypto = require('crypto');
@@ -21,12 +23,15 @@ module.exports =  {
     hash.end();
 
     return result;
-  }
+  },
 
   load_json: function(path) {
     var file_content = fs.readFileSync(path).toString('utf8');
     return JSON.parse(file_content);
-  }
+  },
 
+  store_json: function(path, json) {
+    fs.writeFile(path, JSON.stringify(json, undefined, 2))
+  }
 
 }
