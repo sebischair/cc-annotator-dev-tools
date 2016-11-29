@@ -41,6 +41,7 @@ module.exports =  {
   },
 
   annotation_smell (smell, editoR) {
+    smell.rows = []
 
     var path = editoR.getPath()
     var content = fs.readFileSync(path).toString('utf8')
@@ -51,6 +52,7 @@ module.exports =  {
       var lines = splites[i].split("\n")
       line_nr_local = lines.length - 1
       line_nr_overall += line_nr_local
+      smell.rows.push(line_nr_overall)
       var line = lines[line_nr_local]
       var begin = line.length
       var end = begin + smell.token.length
@@ -59,6 +61,8 @@ module.exports =  {
       var decoration_line_nr = editoR.decorateMarker(marker, {type: 'line-number', class: 'line-number-red'})
       var decoration_token = editoR.decorateMarker(marker, {type: 'highlight', class: 'highlight-red'})
     }
+
+    return smell
 
   }
 

@@ -17,8 +17,10 @@ export default {
   modalPanel: null,
   subscriptions: null,
   server_url: "http://127.0.0.1:8080",
+  annotations_code: [],
 
   activate(state) {
+    self = this
     this.annotatorView = new AnnotatorView(state.annotatorViewState);
     this.modalPanel = atom.workspace.addModalPanel({
       item: this.annotatorView.getElement(),
@@ -35,8 +37,6 @@ export default {
     this.subscriptions.add(atom.commands.add('atom-workspace', {
       'annotator:annotate_comment': () => this.annotate_comment()
     }));
-
-    //storage.store_json("/home/akorus/Schreibtisch/.annotator", {'hello':'world','a':[1,2,3,4]})
   },
 
   deactivate() {
@@ -65,18 +65,7 @@ export default {
         atom.notifications.addSuccess("1")
         comment.update_content_sentiment(content, response)
         overall_sentiment = comment.calc_overall_sentiment(response)
-        /*
-        var response_docs = JSON.parse(response).documents
 
-        var overall_sentiment = 0;
-        for (var i = 0; i < response_docs.length; i++) {
-          content.documents[i].score = response_docs[i].score
-          overall_sentiment += response_docs[i].score
-          decoration.annotation_line(content.documents[i], self.editoR)
-        }
-
-        overall_sentiment = overall_sentiment / response_docs.length
-        */
         return overall_sentiment
 
       }).then((sentiment) => {
@@ -98,12 +87,6 @@ export default {
       url_key_phrases = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/keyPhrases"
       query.ms_services(url_key_phrases, content).then((response) => {
         comment.update_content_keyphrases(content, response)
-        /*var response_docs = JSON.parse(response).documents
-
-        for (var i = 0; i < response_docs.length; i++) {
-          content.documents[i].key_phrases = response_docs[i].keyPhrases
-          decoration.annotation_key(content.documents[i], self.editoR)
-        }*/
       }).catch((err) => {
         console.log("ERROR: "+JSON.stringify(err))
       })/**/
@@ -113,11 +96,6 @@ export default {
   },
 
   /* WEBAPP Praktikum */
-  get_range(smell, file_content) {
-    var prev_content = file_content.substring(smell.begin)
-    var line = (prev_content.match(/\n/g) || []).length;
-  },
-
   annotate_code() {
     self = this
     let editoR
@@ -143,14 +121,49 @@ export default {
 
             for (var i = 0; i < smells.length; i++){
               var smell = smells[i]
-              decoration.annotation_smell(smell, editoR);
+              smell = decoration.annotation_smell(smell, editoR)
+              self.annotations_code.push(smell)
+              atom.notifications.addInfo(JSON.stringify(smell))
             }
       }).catch((err) => {
         console.log("ERROR: "+JSON.stringify(err))
       })/**/
 
+      editoR.onDidChangeCursorPosition(function(event){
+            var cursor = event.cursor
+            var position = event.cursor.getBufferPosition();
+            self.clicked_annotated_line_number(position, function (smell) {
+                atom.notifications.addWarning(smell.name+" at line " +position.row)
+            });
 
+      });
     }
+  },
+
+  get_range(smell, file_content) {
+    var prev_content = file_content.substring(smell.begin)
+    var line = (prev_content.match(/\n/g) || []).length;
+  },
+
+  clicked_annotated_line_number(position, callback){
+      var row = position.row - 1
+      if (position.column == 0) {
+
+          for(var i = 0; i < this.annotations_code.length; i++){
+              var smell = this.annotations_code[i]
+              var rows = smell.rows
+              if (this.isInArray(row, rows)) {
+                callback(smell)
+              }
+          }
+      }
+
+      return false
+
+  },
+
+  isInArray(value, array) {
+    return array.indexOf(value) > -1;
   }
 
 };
