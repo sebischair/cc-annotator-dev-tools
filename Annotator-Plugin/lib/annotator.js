@@ -17,7 +17,7 @@ export default {
   modalPanel: null,
   subscriptions: null,
   server_url: "http://127.0.0.1:8080",
-  annotations_code: [],
+  annotations_code: {},
 
   activate(state) {
     self = this
@@ -105,6 +105,7 @@ export default {
       var path = editoR.getPath()
       var file_content = fs.readFileSync(path).toString('utf8')
 
+      //TODO Update
       var content = {
         "content": file_content,
         "progLanguage": "java",
@@ -113,16 +114,18 @@ export default {
       }
 
       url_sentiment = "https://spotlight.in.tum.de/processCode"
+      atom.notifications.addInfo("Requesting annotation!")
       query.sebis_services(url_sentiment, content).then((response) => {
             atom.notifications.addSuccess(response)
 
             response_parsed = JSON.parse(response)
             var smells = response_parsed.data
-
+            var path = editoR.getPath()
+            this.annotations_code[path] = []
             for (var i = 0; i < smells.length; i++){
               var smell = smells[i]
               smell = decoration.annotation_smell(smell, editoR)
-              self.annotations_code.push(smell)
+              self.annotations_code[path].push(smell)
               atom.notifications.addInfo(JSON.stringify(smell))
             }
       }).catch((err) => {
@@ -132,7 +135,9 @@ export default {
       editoR.onDidChangeCursorPosition(function(event){
             var cursor = event.cursor
             var position = event.cursor.getBufferPosition();
-            self.clicked_annotated_line_number(position, function (smell) {
+            var editoR = atom.workspace.getActiveTextEditor();
+            var path = editoR.getPath();
+            self.clicked_annotated_line_number(position, path, function (smell) {
                 atom.notifications.addWarning(smell.name+" at line " +position.row)
             });
 
@@ -145,14 +150,18 @@ export default {
     var line = (prev_content.match(/\n/g) || []).length;
   },
 
-  clicked_annotated_line_number(position, callback){
+  clicked_annotated_line_number(position, path, callback){
       var row = position.row - 1
+      console.log(row+","+position.column)
+      console.log(JSON.stringify(this.annotations_code[path]))
       if (position.column == 0) {
 
-          for(var i = 0; i < this.annotations_code.length; i++){
-              var smell = this.annotations_code[i]
+          for(var i = 0; i < this.annotations_code[path].length; i++){
+              var smell = this.annotations_code[path][i]
               var rows = smell.rows
+              console.log(JSON.stringify(rows))
               if (this.isInArray(row, rows)) {
+                console.log("Callback")
                 callback(smell)
               }
           }
