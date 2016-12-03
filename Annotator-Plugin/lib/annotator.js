@@ -104,14 +104,18 @@ export default {
       self.editoR = editoR
       var path = editoR.getPath()
       var file_content = fs.readFileSync(path).toString('utf8')
+      var file_name = path.substring(path.lastIndexOf("/") + 1)
+      var file_lang = storage.get_file_lang(file_name)
+      var project_id = "5834589c88695d217c1eed1a"
 
-      //TODO Update
       var content = {
         "content": file_content,
-        "progLanguage": "java",
-        "fileName": "test.vb",
-        "projectId": "5834589c88695d217c1eed1a"
+        "progLanguage": file_lang,
+        "fileName": file_name,
+        "projectId": project_id
       }
+
+      storage.store_annotator_file(editoR.getPath(), content)
 
       url_sentiment = "https://spotlight.in.tum.de/processCode"
       atom.notifications.addInfo("Requesting annotation!")
@@ -128,6 +132,9 @@ export default {
               self.annotations_code[path].push(smell)
               atom.notifications.addInfo(JSON.stringify(smell))
             }
+
+            storage.store_annotator_file(editoR.getPath(), smells)
+            
       }).catch((err) => {
         console.log("ERROR: "+JSON.stringify(err))
       })/**/

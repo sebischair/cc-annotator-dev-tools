@@ -5,6 +5,7 @@ import request from 'request'
 module.exports =  {
 
   ms_services: function(url, content) {
+    console.log(JSON.stringify(content))
     return new Promise((resolve, reject) => {
       request.post(
           {
