@@ -29,6 +29,8 @@ build/Release
 # Dependency directories
 node_modules
 jspm_packages
+tree-view/node_modules
+tree-view/.git
 
 # Optional npm cache directory
 .npm

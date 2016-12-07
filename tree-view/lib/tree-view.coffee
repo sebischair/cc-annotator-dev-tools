@@ -1,11 +1,13 @@
 path = require 'path'
 {shell} = require 'electron'
+q = require 'q'
 
 _ = require 'underscore-plus'
 {BufferedProcess, CompositeDisposable} = require 'atom'
 {repoForPath, getStyleObject, getFullExtension} = require "./helpers"
 {$, View} = require 'atom-space-pen-views'
 fs = require 'fs-plus'
+request = require('request')
 
 AddDialog = null  # Defer requiring until actually needed
 MoveDialog = null # Defer requiring until actually needed
@@ -526,9 +528,120 @@ class TreeView extends View
     @openInFileManager(command, args, label, isFile)
 
   openNewPane: ->
-    test = new PaneView()
-    test.setName = "Test"
-    atom.workspace.addRightPanel(item: test)
+    #@test = document.createElement('span')
+    #@test.textContent = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+    @somediv = document.createElement('div')
+    @somediv.setAttribute('class','native-key-bindings')
+    @frm = document.createElement('form')
+    @somediv.appendChild(@frm)
+    atom.workspace.addRightPanel(item: @somediv)
+    @projectID = "583464c9f18e901138ba5663"
+    @geturl = "https://spotlight.in.tum.de/pattern?projectId=" + @projectID
+    @createFields(@geturl, @frm)
+
+  createFields: (url, frm) ->
+    retrivePatterns(url).then((data) ->
+      count = 0
+      projectID = "583464c9f18e901138ba5663"
+      @linebreak = document.createElement('br')
+      @hbreak = document.createElement('hr')
+      for pat in data
+          count = data.indexOf(pat)
+          @breaker = document.createElement('div')
+          @label1 = document.createTextNode('Name: ')
+          @txt1 = document.createElement('input')
+          @txt1.setAttribute('type',"text")
+          @txt1.setAttribute('id',"patternname" + count)
+          @txt1.setAttribute('value',pat.name)
+          @label2 = document.createTextNode('Description: ')
+          @txt2 = document.createElement('input')
+          @txt2.setAttribute('type',"text")
+          @txt2.setAttribute('id',"patterndesc" + count)
+          @txt2.setAttribute('value',pat.description)
+          @label3 = document.createTextNode('Regex: ')
+          @txt3 = document.createElement('input')
+          @txt3.setAttribute('type',"text")
+          @txt3.setAttribute('id',"patternreg" + count)
+          @txt3.setAttribute('value',pat.regex)
+          @breaker.appendChild(@label1)
+          @breaker.appendChild(@txt1)
+          @breaker.appendChild(@linebreak)
+          @breaker.appendChild(@label2)
+          @breaker.appendChild(@txt2)
+          @breaker.appendChild(@linebreak)
+          @breaker.appendChild(@label3)
+          @breaker.appendChild(@txt3)
+          @breaker.appendChild(@linebreak)
+          frm.appendChild(@breaker)
+          frm.appendChild(@hbreak)
+        frm.appendChild(@hbreak)
+        @breaking = document.createElement('div')
+        @label = document.createTextNode('Name: ')
+        @txt = document.createElement('input')
+        @txt.setAttribute('type',"text")
+        @txt.setAttribute('id',"patternname" + (count+1))
+        @txt.setAttribute('value',"")
+        @label4 = document.createTextNode('Description: ')
+        @txt4 = document.createElement('input')
+        @txt4.setAttribute('type',"text")
+        @txt4.setAttribute('id',"patterndesc"+ (count+1))
+        @txt4.setAttribute('value',"")
+        @label5 = document.createTextNode('Regex: ')
+        @txt5 = document.createElement('input')
+        @txt5.setAttribute('type',"text")
+        @txt5.setAttribute('id',"patternreg" + (count+1))
+        @txt5.setAttribute('value',"")
+        @breaking.appendChild(@label)
+        @breaking.appendChild(@txt)
+        @breaking.appendChild(@linebreak)
+        @breaking.appendChild(@label4)
+        @breaking.appendChild(@txt4)
+        @breaking.appendChild(@linebreak)
+        @breaking.appendChild(@label5)
+        @breaking.appendChild(@txt5)
+        @breaking.appendChild(@linebreak)
+        frm.appendChild(@breaking)
+        frm.appendChild(@hbreak)
+        buttonnode= document.createElement('input')
+        buttonnode.setAttribute('type','button')
+        buttonnode.setAttribute('name','submit')
+        buttonnode.setAttribute('value','Submit')
+        buttonnode.onclick = () ->
+          arr = []
+          for i in [0...count + 2] by 1
+            pat = new Object()
+            pat.name = document.getElementById('patternname' + i).value
+            pat.description = document.getElementById('patterndesc' + i).value
+            pat.regex = document.getElementById('patternreg' + i).value
+            pat.progLanguage = "any"
+            arr.push(pat)
+          jsonsaas = new Object()
+          jsonsaas.projectId = projectID
+          jsonsaas.pattern   = arr
+          console.log(JSON.stringify(jsonsaas))
+        frm.appendChild(buttonnode)
+    )
+
+  retrivePatterns = (url) ->
+    deferred = q.defer()
+    request.get {uri: url}, (err, r, body) ->
+      if (!err && r.statusCode == 200)
+        rsp = JSON.parse(body)
+        deferred.resolve(rsp.data.pattern)
+      else
+        deferred.reject(err)
+    deferred.promise
+
+  createPatternField: (frm,labelName, fieldName, fieldVal) ->
+    @linebreak = document.createElement('br')
+    @label1 = document.createTextNode(labelName)
+    @txt1 = document.createElement('input')
+    @txt1.setAttribute('type',"text")
+    @txt1.setAttribute('name',fieldName)
+    @txt1.setAttribute('value',fieldVal)
+    frm.appendChild(@label1)
+    frm.appendChild(@txt1)
+    frm.appendChild(@linebreak)
 
   getAnnotationsinFile: (fileName) ->
     json = fs.readFileSync(fileName)
@@ -543,7 +656,7 @@ class TreeView extends View
   annotateDirectory: (fileName) ->
     hasAnnotations = false
     isDirectory = fileName instanceof DirectoryView
-    annotatorFile = fileName.getPath() + "\\" + ".annotator"
+    annotatorFile = path.join(fileName.getPath(), ".annotator")
     testlist = fileName.getEntries()
     try
       fs.accessSync(annotatorFile)

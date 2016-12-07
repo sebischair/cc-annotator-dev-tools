@@ -3,7 +3,7 @@ FileIcons = require './file-icons'
 
 module.exports =
 class PaneView extends HTMLElement
-  initialize: (@name) ->
+  initialize: (@name, @line, @file, @vote, @line_content, @description) ->
     @nameElem = document.createElement('span')
     @nameElem.classList.add('name', 'icon')
     @appendChild(@nameElem)
