@@ -16,7 +16,6 @@ export default {
   annotatorView: null,
   modalPanel: null,
   subscriptions: null,
-  server_url: "http://127.0.0.1:8080",
   annotations_code: {},
 
   activate(state) {
@@ -37,6 +36,7 @@ export default {
     this.subscriptions.add(atom.commands.add('atom-workspace', {
       'annotator:annotate_comment': () => this.annotate_comment()
     }));
+    atom.notifications.addSuccess("Started Annotator Plugin")
   },
 
   deactivate() {
@@ -104,13 +104,15 @@ export default {
       self.editoR = editoR
       var path = editoR.getPath()
       var file_content = fs.readFileSync(path).toString('utf8')
+      var file_name = path.substring(path.lastIndexOf("/") + 1)
+      var file_lang = storage.get_file_lang(file_name)
+      var project_id = "5834589c88695d217c1eed1a"
 
-      //TODO Update
       var content = {
         "content": file_content,
-        "progLanguage": "java",
-        "fileName": "test.vb",
-        "projectId": "5834589c88695d217c1eed1a"
+        "progLanguage": file_lang,
+        "fileName": file_name,
+        "projectId": project_id
       }
 
       url_sentiment = "https://spotlight.in.tum.de/processCode"
@@ -126,8 +128,17 @@ export default {
               var smell = smells[i]
               smell = decoration.annotation_smell(smell, editoR)
               self.annotations_code[path].push(smell)
-              atom.notifications.addInfo(JSON.stringify(smell))
             }
+
+            response_parsed.annotations   = smells
+            response_parsed.meta['name']  = content.fileName
+            response_parsed.meta['lang']  = content.progLanguage
+            response_parsed.meta['hash']  = storage.createHash(content.content)
+            delete response_parsed['data']
+            delete response_parsed['status']
+
+            storage.store_annotator_file(editoR.getPath(), response_parsed)
+
       }).catch((err) => {
         console.log("ERROR: "+JSON.stringify(err))
       })/**/
