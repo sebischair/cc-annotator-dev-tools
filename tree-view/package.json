@@ -16,7 +16,9 @@
     "minimatch": "~0.3.0",
     "pathwatcher": "^6.2",
     "temp": "~0.8.1",
-    "underscore-plus": "^1.0.0"
+    "underscore-plus": "^1.0.0",
+	"request": "^2.79.0",
+    "q": "^1.4.1"
   },
   "devDependencies": {
     "coffeelint": "^1.9.7"
