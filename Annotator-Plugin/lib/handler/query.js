@@ -5,6 +5,7 @@ import request from 'request'
 module.exports =  {
 
   ms_services: function(url, content) {
+
     return new Promise((resolve, reject) => {
       request.post(
           {

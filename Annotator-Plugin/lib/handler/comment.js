@@ -45,19 +45,48 @@ module.exports =  {
     extractJavaCommentStyle(lines) {
       var documents = []
 
+      var last_line_comment = -2
+      var start_line = -2
+      var comment = ""
+
       for (i = 0; i < lines.length; i ++){
-          if (lines[i].includes("://") || lines[i].includes("\"//\"")){
+          var line = lines[i]
+
+
+          if (line.includes("://") || line.includes("\"//\"")){
             continue;
           }
-          if (lines[i].includes("//")){
+
+          if (line.includes("//")){
+              /*if (start_line === -2){
+                start_line = i
+              }/**/
+              comment = line
+              //comment += " \n"+line.replace("//", "").trim()
+              //last_line_comment = i
+              documents.push({
+                "language": "en",
+                "id": i,
+                "text": comment,
+                "score": 0.5,
+                "key_phrases": []
+              })
+
+          }
+          /* else if (comment != "" && last_line_comment + 1 != i) {
             documents.push({
               "language": "en",
-              "id": i,
-              "text": lines[i],
+              "id": i - 1,
+              "start_line": start_line,
+              "end_line": i - 1,
+              "text": comment.trim(),
               "score": 0.5,
               "key_phrases": []
             })
-          }
+
+            start_line = -2
+            comment = ""
+          }/**/
       }
 
       return documents

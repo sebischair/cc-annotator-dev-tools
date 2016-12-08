@@ -9,7 +9,7 @@ module.exports =  {
     var score = annotation.score
 
     var range = [[line,0],[line,1]]
-    var marker = editoR.markBufferRange(range)
+    var marker = editoR.markBufferRange(range, {invalidate: 'never'})
     atom.notifications.addInfo("Marking Line "+line)
     if (score < 0.4) {
         var decoration = editoR.decorateMarker(marker, {type: 'line-number', class: 'line-number-red'})
@@ -33,7 +33,7 @@ module.exports =  {
         var length = key_phrases[i].length
         var end = start + length
         var range = [[line, start], [line, end]]
-        var marker = editoR.markBufferRange(range)
+        var marker = editoR.markBufferRange(range, {invalidate: 'never'})
         var decoration = editoR.decorateMarker(marker, {type: 'highlight', class: 'highlight-blue'})
         //atom.tooltips.add(marker, {title: "The package version"})
     }
@@ -57,7 +57,7 @@ module.exports =  {
       var begin = line.length
       var end = begin + smell.token.length
       var range = [[line_nr_overall,begin],[line_nr_overall,end]]
-      var marker = editoR.markBufferRange(range)
+      var marker = editoR.markBufferRange(range, {invalidate: 'never'})
       var decoration_line_nr = editoR.decorateMarker(marker, {type: 'line-number', class: 'line-number-red'})
       var decoration_token = editoR.decorateMarker(marker, {type: 'highlight', class: 'highlight-red'})
     }

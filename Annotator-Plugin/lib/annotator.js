@@ -62,7 +62,7 @@ export default {
       url_sentiment = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment"
       // No sentiment for German language
       query.ms_services(url_sentiment, content).then((response) => {
-        atom.notifications.addSuccess("1")
+
         comment.update_content_sentiment(content, response)
         overall_sentiment = comment.calc_overall_sentiment(response)
 
