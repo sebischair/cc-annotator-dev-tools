@@ -6,7 +6,7 @@
 @import "variables";
 
 
-atom-text-editor .gutter .line-number {
+atom-text-editor::shadow .gutter .line-number {
   &.line-number-green {
     color: #fff;
     background-color: @green-color;
@@ -28,7 +28,7 @@ atom-text-editor .gutter .line-number {
   }
 }
 
-atom-text-editor .line {
+atom-text-editor::shadow .line {
   &.line-green {
     background-color: @green-color;
   }
@@ -42,18 +42,16 @@ atom-text-editor .line {
   }
 }
 
-atom-text-editor {
-
-  .highlight-green .region {
+atom-text-editor::shadow .highlight {
+  &.highlight-green {
     background-color: @green-color;
   }
 
-  .highlight-blue .region {
+  &.highlight-blue {
     background-color: @blue-color;
   }
 
-  .highlight-red .region {
+  &.highlight-red {
     background-color: @red-color;
   }
-
 }
