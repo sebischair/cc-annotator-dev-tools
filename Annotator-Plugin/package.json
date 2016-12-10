@@ -5,8 +5,12 @@
   "description": "A short description of your package",
   "keywords": [],
   "activationCommands": [
-    {"atom-workspace": "annotator:annotate_comment"},
-    {"atom-workspace": "annotator:annotate_code"}
+    {
+      "atom-workspace": "annotator:annotate_comment"
+    },
+    {
+      "atom-workspace": "annotator:annotate_code"
+    }
   ],
   "repository": "https://github.com/atom/annotator",
   "license": "MIT",
@@ -16,6 +20,10 @@
   "dependencies": {
     "atom-space-pen-views": "^2.0.3",
     "request": "~2.73.0",
-    "fs-plus": "~2.9.3"
+    "fs-plus": "~2.9.3",
+    "clear-cut": "~2.0.1",
+    "binary-search": "~1.3.2",
+    "event-kit": "~2.2.0",
+    "path": "~0.12.7"
   }
 }

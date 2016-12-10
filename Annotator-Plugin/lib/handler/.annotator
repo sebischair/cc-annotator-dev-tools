@@ -1,0 +1,18 @@
+{
+  "projectId": "5834589c88695d217c1eed1a",
+  "annotated_files": [
+    {
+      "meta": {
+        "fileId": "584b3aa4f18e9004a0f734f7",
+        "timeStamp": "2016-12-10 00:13:40.971",
+        "projectId": "5834589c88695d217c1eed1a",
+        "name": "comment.js",
+        "lang": "js",
+        "hash": "d881384daeb65b05d53861769ca5c97bf67c95af914833692af08707183e9a0a"
+      },
+      "annotations": []
+    }
+  ],
+  "skipped_files": [],
+  "last_update": "2016-12-10 00:13:40.971"
+}

@@ -8,7 +8,6 @@ import storage from './handler/storage';
 import { CompositeDisposable } from 'atom';
 import request from 'request';
 
-$ = jQuery = require('jquery')
 fs = require ('fs-plus')
 
 export default {
@@ -36,6 +35,8 @@ export default {
     this.subscriptions.add(atom.commands.add('atom-workspace', {
       'annotator:annotate_comment': () => this.annotate_comment()
     }));
+
+
     atom.notifications.addSuccess("Started Annotator Plugin")
   },
 
@@ -57,6 +58,9 @@ export default {
     if (editoR = atom.workspace.getActiveTextEditor()){
 
       self.editoR = editoR
+
+      // Save open editor to ensure the right data is send to the server
+
       var content = comment.generate_base_content(editoR);
 
       url_sentiment = "https://westus.api.cognitive.microsoft.com/text/analytics/v2.0/sentiment"
@@ -102,8 +106,10 @@ export default {
     if (editoR = atom.workspace.getActiveTextEditor()){
 
       self.editoR = editoR
+      // Save open editor to ensure the right data is send to the server
+
       var path = editoR.getPath()
-      var file_content = fs.readFileSync(path).toString('utf8')
+      var file_content = editoR.getText()
       var file_name = path.substring(path.lastIndexOf("/") + 1)
       var file_lang = storage.get_file_lang(file_name)
       var project_id = "5834589c88695d217c1eed1a"
@@ -115,15 +121,20 @@ export default {
         "projectId": project_id
       }
 
+      var path = editoR.getPath()
+      this.annotations_code[path] = []
+
       url_sentiment = "https://spotlight.in.tum.de/processCode"
       atom.notifications.addInfo("Requesting annotation!")
       query.sebis_services(url_sentiment, content).then((response) => {
             atom.notifications.addSuccess(response)
-
             response_parsed = JSON.parse(response)
             var smells = response_parsed.data
+
             var path = editoR.getPath()
             this.annotations_code[path] = []
+            decoration.destroyAnnotations(editoR)
+
             for (var i = 0; i < smells.length; i++){
               var smell = smells[i]
               smell = decoration.annotation_smell(smell, editoR)
@@ -153,6 +164,8 @@ export default {
             });
 
       });
+
+      editoR.onDidChange(this.update_annotation_indices);
     }
   },
 
@@ -164,7 +177,7 @@ export default {
   clicked_annotated_line_number(position, path, callback){
       var row = position.row - 1
       console.log(row+","+position.column)
-      console.log(JSON.stringify(this.annotations_code[path]))
+
       if (position.column == 0) {
 
           for(var i = 0; i < this.annotations_code[path].length; i++){
@@ -172,10 +185,10 @@ export default {
               var rows = smell.rows
               console.log(JSON.stringify(rows))
               if (this.isInArray(row, rows)) {
-                console.log("Callback")
                 callback(smell)
               }
           }
+
       }
 
       return false
@@ -184,6 +197,21 @@ export default {
 
   isInArray(value, array) {
     return array.indexOf(value) > -1;
+  },
+
+  update_annotation_indices(){
+    var editoR = atom.workspace.getActiveTextEditor()
+
+    var path = editoR.getPath()
+    var smells = self.annotations_code[path]
+    self.annotations_code[path] = []
+    decoration.destroyAnnotations(editoR)
+
+    for (var i = 0; i < smells.length; i++){
+      var smell = smells[i]
+      smell = decoration.annotation_smell(smell, editoR)
+      self.annotations_code[path].push(smell)
+    }
   }
 
 };

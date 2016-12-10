@@ -6,7 +6,7 @@ import decoration from '../handler/decoration';
 module.exports =  {
       generate_base_content: function(editoR){
       var path = editoR.getPath()
-      var file_content = fs.readFileSync(path).toString('utf8')
+      var file_content = editoR.getText()
       var documents = []
       var lines = file_content.split("\n")
 
@@ -58,12 +58,8 @@ module.exports =  {
           }
 
           if (line.includes("//")){
-              /*if (start_line === -2){
-                start_line = i
-              }/**/
+
               comment = line
-              //comment += " \n"+line.replace("//", "").trim()
-              //last_line_comment = i
               documents.push({
                 "language": "en",
                 "id": i,
@@ -73,20 +69,7 @@ module.exports =  {
               })
 
           }
-          /* else if (comment != "" && last_line_comment + 1 != i) {
-            documents.push({
-              "language": "en",
-              "id": i - 1,
-              "start_line": start_line,
-              "end_line": i - 1,
-              "text": comment.trim(),
-              "score": 0.5,
-              "key_phrases": []
-            })
 
-            start_line = -2
-            comment = ""
-          }/**/
       }
 
       return documents
@@ -102,7 +85,7 @@ module.exports =  {
           }
           if (lines[i].includes("#")){
             documents.push({
-              "language": "de",
+              "language": "en",
               "id": i,
               "text": lines[i],
               "score": 0.5,
@@ -119,7 +102,7 @@ module.exports =  {
       for (i = 0; i < lines.length; i ++){
           if (lines[i].trim().startsWith("'")){
             documents.push({
-              "language": "de",
+              "language": "en",
               "id": i,
               "text": lines[i],
               "score": 0.5,
