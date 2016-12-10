@@ -56,7 +56,17 @@ class DirectoryView extends HTMLElement
       @subscriptions.add @directory.onDidStatusChange => @updateStatus()
       @updateStatus()
 
+
+    @checkAnnots(@directoryName, @directory)
+
     @expand() if @directory.expansionState.isExpanded
+
+  checkAnnots: (direcName, direc) ->
+    direc.checkIfHasAnnotations().then((hasAnn) ->
+      console.log("Annotator PRESENT??????? " + hasAnn)
+      if(hasAnn)
+        direcName.classList.add 'isAnnotated'  
+      )
 
   updateStatus: ->
     @classList.remove('status-ignored', 'status-modified', 'status-added')

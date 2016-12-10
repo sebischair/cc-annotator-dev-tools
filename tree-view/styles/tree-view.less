@@ -1,12 +1,12 @@
 @import "ui-variables";
 
 @red-folders:
-  'lib'
+  'menus'
 ;
 
 @red-folders-color: rgb(255, 114, 117);
 
-@octicon-icon: '\f015';
+@octicon-icon: '\f016';
 
 @folder-to-color-maps:
   @red-folders @red-folders-color,
@@ -34,7 +34,11 @@
     font-family: 'Octicons Regular';
     content: "@{octicon-icon}";
     font-size: 16px;
-    margin-left: 20px;
+	position: relative;
+	left: -100%;
+    margin-right: -12px;
+	top: 2px;
+
   }
 }
 
@@ -45,6 +49,7 @@
 .isAnnotated {
   color: red !important;
 }
+
 
 .tree-view-resizer {
   position: relative;

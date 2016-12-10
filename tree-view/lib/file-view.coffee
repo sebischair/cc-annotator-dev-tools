@@ -25,6 +25,13 @@ class FileView extends HTMLElement
         iconClass = iconClass.toString().split(/\s+/g)
       @fileName.classList.add(iconClass...)
 
+    console.log(@file.getAnnotated())
+    if(@file.getAnnotated())
+      console.log("In the loop")
+      @fileName.classList.add 'isAnnotated'
+    else
+      console.log("Not in loop")
+
     @subscriptions.add @file.onDidStatusChange => @updateStatus()
     @updateStatus()
 
@@ -40,5 +47,8 @@ class FileView extends HTMLElement
 
   isPathEqual: (pathToCompare) ->
     @file.isPathEqual(pathToCompare)
+
+  getFile: ->
+    @file
 
 module.exports = document.registerElement('tree-view-file', prototype: FileView.prototype, extends: 'li')

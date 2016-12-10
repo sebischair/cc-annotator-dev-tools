@@ -670,8 +670,10 @@ class TreeView extends View
         if elem.getName() in filestoBeMarked
           hasAnnotations = true
           console.log("Found file to be marked")
-          elem.classList.add 'isAnnotated'
-          elem.classList.add 'red-folders'
+          elem.getFile().setAnnotated(true)
+          console.log(elem.getFile())
+          #elem.classList.add 'isAnnotated'
+          #elem.classList.add 'red-folders'
         else
           console.log("Not file to be marked")
     catch e

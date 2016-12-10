@@ -25,6 +25,17 @@ class File
           @realPath = realPath
           @updateStatus()
 
+    directoryPath = path.dirname(@path)
+    annotatorFile = path.join(directoryPath, ".annotator")
+    console.log(directoryPath)
+    try
+      fs.accessSync(annotatorFile)
+      @isAnnotated = @getAnnotationsinFile(annotatorFile)
+      console.log("Is Annotated: " + @isAnnotated)
+    catch error
+      @isAnnotated = false
+      console.log(error)
+
   destroy: ->
     @destroyed = true
     @subscriptions.dispose()
@@ -45,6 +56,12 @@ class File
       @updateStatus(repo) if @isPathEqual(event.path)
     @subscriptions.add repo.onDidChangeStatuses =>
       @updateStatus(repo)
+
+  setAnnotated: (hasAnnotation) ->
+    @isAnnotated = hasAnnotation
+
+  getAnnotated: ->
+    @isAnnotated
 
   # Update the status property of this directory using the repo.
   updateStatus: ->
@@ -67,3 +84,17 @@ class File
 
   isPathEqual: (pathToCompare) ->
     @path is pathToCompare or @realPath is pathToCompare
+
+  getAnnotationsinFile: (fileName) ->
+    fileHasAnnotatations = false
+    json = fs.readFileSync(fileName)
+    data = JSON.parse(json)
+    annotatedFiles = data.annotated_files
+    filesList = []
+    console.log("Getting annotations...")
+    for entry in annotatedFiles
+      console.log("Entry " + entry.meta.name)
+      console.log("Name " + @name)
+      if(entry.meta.name == @name)
+        fileHasAnnotatations = true
+    return fileHasAnnotatations

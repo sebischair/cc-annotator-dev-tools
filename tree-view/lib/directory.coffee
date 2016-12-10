@@ -4,6 +4,8 @@ _ = require 'underscore-plus'
 fs = require 'fs-plus'
 PathWatcher = require 'pathwatcher'
 File = require './file'
+glob = require('glob')
+q = require('q')
 {repoForPath} = require './helpers'
 realpathCache = {}
 
@@ -292,3 +294,19 @@ class Directory
       @squashedNames = [squashedDirs[0..squashedDirs.length - 2].join(path.sep) + path.sep, _.last(squashedDirs)]
 
     return fullPath
+
+  getAnnotations: ->
+    @hasAnnotations
+
+  checkIfHasAnnotations: ->
+    deferred = q.defer()
+    pattern = @path + "/**/.annotator"
+    glob (pattern) , (err, files) ->
+      if(err)
+        deferred.reject(err)
+      else
+        if(files.length > 0)
+          deferred.resolve(true)
+        else
+          deferred.resolve(false)
+    deferred.promise
