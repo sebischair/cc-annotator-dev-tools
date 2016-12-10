@@ -93,8 +93,8 @@ class File
     filesList = []
     console.log("Getting annotations...")
     for entry in annotatedFiles
-      console.log("Entry " + entry.name)
+      console.log("Entry " + entry.meta.name)
       console.log("Name " + @name)
-      if(entry.name == @name)
+      if(entry.meta.name == @name)
         fileHasAnnotatations = true
     return fileHasAnnotatations
