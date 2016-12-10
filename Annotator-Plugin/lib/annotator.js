@@ -5,10 +5,12 @@ import query from './handler/query';
 import decoration from './handler/decoration';
 import comment from './handler/comment';
 import storage from './handler/storage';
+import SidebarView from './handler/sidebar';
 import { CompositeDisposable } from 'atom';
 import request from 'request';
 
 fs = require ('fs-plus')
+path_lib = require('path')
 
 export default {
 
@@ -36,6 +38,8 @@ export default {
       'annotator:annotate_comment': () => this.annotate_comment()
     }));
 
+    this.SidebarView = new SidebarView();
+    this.SidebarView.attach();
 
     atom.notifications.addSuccess("Started Annotator Plugin")
   },
@@ -110,7 +114,7 @@ export default {
 
       var path = editoR.getPath()
       var file_content = editoR.getText()
-      var file_name = path.substring(path.lastIndexOf("/") + 1)
+      var file_name = path.substring(path.lastIndexOf(path_lib.sep) + 1)
       var file_lang = storage.get_file_lang(file_name)
       var project_id = "5834589c88695d217c1eed1a"
 
