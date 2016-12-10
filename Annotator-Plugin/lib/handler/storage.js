@@ -2,7 +2,7 @@
 
 fs = require ('fs-plus')
 fs_o = require('fs');
-
+path_lib = require('path');
 
 module.exports =  {
 
@@ -46,7 +46,7 @@ module.exports =  {
   },
 
   store_annotator_file: function(file_to_store, result){
-    var base_path = file_to_store.substring(0, file_to_store.lastIndexOf("/")+1)
+    var base_path = file_to_store.substring(0, file_to_store.lastIndexOf(path_lib.sep)+1)
     var annotator_file = base_path + ".annotator"
 
     if (this.isFile(annotator_file)){
