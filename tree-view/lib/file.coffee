@@ -95,6 +95,6 @@ class File
     for entry in annotatedFiles
       console.log("Entry " + entry.meta.name)
       console.log("Name " + @name)
-      if(entry.meta.name == @name)
+      if (entry.meta.name == @name) && (entry.annotations.length > 0)
         fileHasAnnotatations = true
     return fileHasAnnotatations

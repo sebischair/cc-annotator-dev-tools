@@ -305,8 +305,17 @@ class Directory
       if(err)
         deferred.reject(err)
       else
+        resp = false
         if(files.length > 0)
-          deferred.resolve(true)
+          for sfile in files
+            json = fs.readFileSync(sfile)
+            try
+              data = JSON.parse(json)
+              for entry in data.annotated_files
+                if(entry.annotations.length > 0)
+                  resp = true
+            catch err
+          deferred.resolve(resp)
         else
           deferred.resolve(false)
     deferred.promise
