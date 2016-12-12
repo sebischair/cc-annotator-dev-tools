@@ -41,7 +41,7 @@ module.exports =  {
 
     var range = [[line,0],[line,1]]
     var marker = editoR.markBufferRange(range, {invalidate: 'never'})
-    atom.notifications.addInfo("Marking Line "+line)
+    //atom.notifications.addInfo("Marking Line "+line)
 
     if (score < 0.4) {
         var decoration = editoR.decorateMarker(marker, {type: 'line-number', class: 'line-number-red'})

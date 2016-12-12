@@ -5,8 +5,8 @@ import query from './handler/query';
 import decoration from './handler/decoration';
 import comment from './handler/comment';
 import storage from './handler/storage';
-import SidebarView from './handler/sidebar';
-import PaneView from './handler/side-pane';
+//import SidebarView from './handler/sidebar';
+//import PaneView from './handler/side-pane';
 import { CompositeDisposable } from 'atom';
 import request from 'request';
 
@@ -43,8 +43,8 @@ export default {
     this.side_pane = new PaneView();
     this.side_pane.initialize("name", "line", "file", "vote", "line_content", "description");
     this.side_pane.attach();/**/
-    this.SidebarView = new SidebarView();
-    this.SidebarView.attach();
+    //this.SidebarView = new SidebarView();
+    //this.SidebarView.attach();
 
     atom.notifications.addSuccess("Started Annotator Plugin")
   },
