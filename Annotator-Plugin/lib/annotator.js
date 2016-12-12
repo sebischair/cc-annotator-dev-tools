@@ -6,6 +6,7 @@ import decoration from './handler/decoration';
 import comment from './handler/comment';
 import storage from './handler/storage';
 import SidebarView from './handler/sidebar';
+import PaneView from './handler/side-pane';
 import { CompositeDisposable } from 'atom';
 import request from 'request';
 
@@ -38,6 +39,10 @@ export default {
       'annotator:annotate_comment': () => this.annotate_comment()
     }));
 
+    /**
+    this.side_pane = new PaneView();
+    this.side_pane.initialize("name", "line", "file", "vote", "line_content", "description");
+    this.side_pane.attach();/**/
     this.SidebarView = new SidebarView();
     this.SidebarView.attach();
 
@@ -165,6 +170,7 @@ export default {
             var path = editoR.getPath();
             self.clicked_annotated_line_number(position, path, function (smell) {
                 atom.notifications.addWarning(smell.name+" at line " +position.row)
+                self.SidebarView.display_annotation(smell);
             });
 
       });
