@@ -5,8 +5,8 @@ import query from './handler/query';
 import decoration from './handler/decoration';
 import comment from './handler/comment';
 import storage from './handler/storage';
-//import SidebarView from './handler/sidebar';
-//import PaneView from './handler/side-pane';
+import SidebarView from './handler/sidebar';
+import PaneView from './handler/side-pane';
 import { CompositeDisposable } from 'atom';
 import request from 'request';
 
@@ -44,6 +44,7 @@ export default {
     this.side_pane.initialize("name", "line", "file", "vote", "line_content", "description");
     this.side_pane.attach();/**/
     //this.SidebarView = new SidebarView();
+    this.SidebarView = new PaneView();
     //this.SidebarView.attach();
 
     atom.notifications.addSuccess("Started Annotator Plugin")
@@ -134,9 +135,9 @@ export default {
       this.annotations_code[path] = []
 
       url_sentiment = "https://spotlight.in.tum.de/processCode"
-      atom.notifications.addInfo("Requesting annotation!")
+      //atom.notifications.addInfo("Requesting annotation!")
       query.sebis_services(url_sentiment, content).then((response) => {
-            atom.notifications.addSuccess(response)
+            //atom.notifications.addSuccess(response)
             response_parsed = JSON.parse(response)
             var smells = response_parsed.data
 
@@ -163,14 +164,30 @@ export default {
         console.log("ERROR: "+JSON.stringify(err))
       })/**/
 
+      self.SidebarViewInitialized = false
+
       editoR.onDidChangeCursorPosition(function(event){
             var cursor = event.cursor
             var position = event.cursor.getBufferPosition();
             var editoR = atom.workspace.getActiveTextEditor();
             var path = editoR.getPath();
             self.clicked_annotated_line_number(position, path, function (smell) {
-                atom.notifications.addWarning(smell.name+" at line " +position.row)
-                self.SidebarView.display_annotation(smell);
+                //atom.notifications.addWarning(smell.name+" at line " +position.row)
+                //self.SidebarView.display_annotation(smell);
+                if (!self.SidebarViewInitialized){
+                  self.SidebarViewInitialized = true
+                } else {
+                  self.SidebarView.destroy()
+                }
+
+                smell.description = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
+                smell.votes = 0
+                if (smell.name == "Hardcoded system name detected"){
+                  smell.votes = 3
+                }
+                self.SidebarView.initialize(smell.name, smell.rows, "@file", smell.votes, smell.token, smell.description, position.row)
+                self.SidebarView.attach()
+
             });
 
       });
@@ -196,6 +213,7 @@ export default {
               console.log(JSON.stringify(rows))
               if (this.isInArray(row, rows)) {
                 callback(smell)
+                return
               }
           }
 
