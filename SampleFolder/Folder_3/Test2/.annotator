@@ -3,21 +3,21 @@
   "annotated_files": [
     {
       "meta": {
-        "fileId": "5849d7b2f18e9004a0f7349c",
-        "timeStamp": "2016-12-08 22:59:15.453",
+        "fileId": "5853a506f18e90071011168a",
+        "timeStamp": "2016-12-16 09:25:43.065",
         "projectId": "5834589c88695d217c1eed1a",
         "name": "SGH.MCR",
         "lang": "MCR",
-        "hash": "f9074a39ea818b8e3baf5c73435e5384efc03bd9987ee32ac596be918422a90a"
+        "hash": "c463812aabce7fc956f7fd70b25df6fc0d88f61141a8a836ccc9782cdc453e42"
       },
       "annotations": [
         {
-          "begin": "668",
-          "end": "676",
+          "begin": "664",
+          "end": "672",
           "name": "Hardcoded system name detected",
           "token": "CU250S_2",
           "rows": [
-            21,
+            20,
             29
           ]
         },
@@ -27,7 +27,7 @@
           "name": "Hardcoded system name detected",
           "token": "CU250S_2",
           "rows": [
-            21,
+            20,
             29
           ]
         },
@@ -41,60 +41,8 @@
           ]
         }
       ]
-    },
-    {
-      "meta": {
-        "fileId": "584421a0f18e900f803d84ca",
-        "timeStamp": "2016-12-04 15:01:05.003",
-        "projectId": "5834589c88695d217c1eed1a",
-        "name": "FGH.bas",
-        "lang": "bas",
-        "hash": "1320b5dc13aa91dbac6eabc346cb655592aef8244a8ed04b8c4b3bdd59b8af4c"
-      },
-      "annotations": []
-    },
-    {
-      "meta": {
-        "fileId": "5849382af18e9004a0f73487",
-        "timeStamp": "2016-12-08 11:38:35.555",
-        "projectId": "5834589c88695d217c1eed1a",
-        "name": "SGH0.MCR",
-        "lang": "MCR",
-        "hash": "4de85c6b6cab6080f8e11c03f3a1df133555b2cbb3eb8352d8456048191de5d4"
-      },
-      "annotations": [
-        {
-          "begin": "656",
-          "end": "664",
-          "name": "Hardcoded system name detected",
-          "token": "CU250S_2",
-          "rows": [
-            18,
-            26
-          ]
-        },
-        {
-          "begin": "838",
-          "end": "846",
-          "name": "Hardcoded system name detected",
-          "token": "CU250S_2",
-          "rows": [
-            18,
-            26
-          ]
-        },
-        {
-          "begin": "1179",
-          "end": "1187",
-          "name": "Hardcoded wait function detected",
-          "token": "wait(10)",
-          "rows": [
-            42
-          ]
-        }
-      ]
     }
   ],
   "skipped_files": [],
-  "last_update": "2016-12-04 15:00:51.236"
+  "last_update": "2016-12-09 22:00:12.194"
 }

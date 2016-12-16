@@ -1,0 +1,37 @@
+{
+  "projectId": "5834589c88695d217c1eed1a",
+  "annotated_files": [
+    {
+      "meta": {
+        "fileId": "584c483df18e9013fc8d54d8",
+        "timeStamp": "2016-12-10 19:23:57.663",
+        "projectId": "5834589c88695d217c1eed1a",
+        "name": "ERT.MCR",
+        "lang": "MCR",
+        "hash": "2999c97f7221887f468e4364e189958c0366f7ce08be74f16066946c19e90009"
+      },
+      "annotations": [
+        {
+          "begin": "192",
+          "end": "200",
+          "name": "Hardcoded system name detected",
+          "token": "CU250S_2",
+          "rows": [
+            0
+          ]
+        },
+        {
+          "begin": "206",
+          "end": "214",
+          "name": "Hardcoded wait function detected",
+          "token": "wait(10)",
+          "rows": [
+            0
+          ]
+        }
+      ]
+    }
+  ],
+  "skipped_files": [],
+  "last_update": "2016-12-10 19:23:57.663"
+}

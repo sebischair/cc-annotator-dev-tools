@@ -15,17 +15,17 @@ Option Explicit
 ' *                                                                                                                     *
 ' * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-
-
 Sub SolutionMain
 
-If myCuType <> CU250S_2 Then
+
+If      myCuType <> CU250S_2 Then
     ' Deactivate function module
     ActivateFunctionModule ( Extended_setpoint_channel )
 
     ' Upload project
     UploadProject ()
 End If
+
 
 If myCuType <> CU250S_2 Then
     ' Deactivate function module
