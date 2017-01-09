@@ -1,7 +1,7 @@
 {
   "name": "annotator",
   "main": "./lib/annotator",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A short description of your package",
   "keywords": [],
   "activationCommands": [
@@ -10,6 +10,9 @@
     },
     {
       "atom-workspace": "annotator:annotate_code"
+    },
+    {
+      "atom-workspace": "annotator:submit_annotation"
     }
   ],
   "repository": "https://github.com/atom/annotator",

@@ -38,6 +38,9 @@ export default {
     this.subscriptions.add(atom.commands.add('atom-workspace', {
       'annotator:annotate_comment': () => this.annotate_comment()
     }));
+    this.subscriptions.add(atom.commands.add('atom-workspace', {
+      'annotator:submit_annotation': () => this.submit_annotation()
+    }));
 
     /**
     this.side_pane = new PaneView();
@@ -239,6 +242,19 @@ export default {
       var smell = smells[i]
       smell = decoration.annotation_smell(smell, editoR)
       self.annotations_code[path].push(smell)
+    }
+  },
+
+  submit_annotation(){
+    self = this
+    let editoR
+    if (editoR = atom.workspace.getActiveTextEditor()){
+        var range = editoR.getSelectedBufferRange();
+        var token = editoR.getSelectedText();
+        var lines = fs.readFileSync(editoR.getPath()).toString().split("\n");
+        var path  = editoR.getPath();
+        var lang  = storage.get_file_lang(path);
+        atom.notifications.addInfo("Request:");
     }
   }
 
