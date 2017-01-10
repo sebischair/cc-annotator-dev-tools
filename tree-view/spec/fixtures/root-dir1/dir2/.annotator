@@ -1,43 +1,16 @@
 {
+  "projectId": "5834589c88695d217c1eed1a",
   "annotated_files": [
     {
-      "id": "gggdfsjfhdskjeew",
-      "name": "File_2.go",
-      "annotation_date": "Wed Mar 25 2015 01:00:00 GMT+0100 (CET)",
-      "hash": "9f9a2f08500daaee7262a1161639d829686fe423f4e4bfe3816e673170fca70b",
-      "lang": "go",
-      "annotations": [
-        {
-          "name": "Bad What Ever",
-          "line": 27,
-          "vote": "not yet",
-          "line_content": "tuple = tuple[:len(tuple)-1] + \")\"",
-          "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-        },
-        {
-          "name": "Very Bad Code",
-          "line": 45,
-          "vote": "bad",
-          "line_content": "connChannel := make(chan Edge)",
-          "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-        }
-      ]
-    },
-    {
-      "id": "ddddddkjeew",
-      "name": "File_3.go",
-      "annotation_date": "Wed Mar 26 2015 01:00:00 GMT+0100 (CET)",
-      "hash": "158646bccd92caea1bb8027d65c452d7309567113cc9b7aaeca1a2c7ba262716",
-      "lang": "go",
-      "annotations": [
-        {
-          "name": "Other Bad Thing Ever",
-          "line": 42,
-          "vote": "good",
-          "line_content": "for _, id := range family_id ",
-          "description": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\n\nLorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."
-        }
-      ]
+      "meta": {
+        "fileId": "584c5ca9f18e9013fc8d54e4",
+        "timeStamp": "2016-12-10 20:51:06.065",
+        "projectId": "5834589c88695d217c1eed1a",
+        "name": "File_2.go",
+        "lang": "go",
+        "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "annotations": []
     }
   ],
   "id": "123dfs34243sfsd",

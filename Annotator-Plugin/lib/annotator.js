@@ -256,11 +256,24 @@ export default {
     if (editoR = atom.workspace.getActiveTextEditor()){
         var range = editoR.getSelectedBufferRange();
         var token = editoR.getSelectedText();
+        var code  = editoR.getText();
         var lines = fs.readFileSync(editoR.getPath()).toString().split("\n");
         var path  = editoR.getPath();
         var lang  = storage.get_file_lang(path);
-        this.modal.show()
-        atom.notifications.addInfo("Request:");
+        var annotation = {
+          range: range,
+          token: token,
+          lines: lines,
+          path: path,
+          lang: lang,
+          code: code
+        }
+
+        if ((range.end.column - range.start.column) > 1){
+          this.modalView.show(annotation);
+          this.modal.show();
+          atom.notifications.addInfo("Request:");
+        }
     }
   },
 
