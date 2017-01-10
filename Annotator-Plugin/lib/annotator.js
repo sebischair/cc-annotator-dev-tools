@@ -7,6 +7,7 @@ import comment from './handler/comment';
 import storage from './handler/storage';
 import SidebarView from './handler/sidebar';
 import PaneView from './handler/side-pane';
+import AnnotationModal from './handler/annotation-modal';
 import { CompositeDisposable } from 'atom';
 import request from 'request';
 
@@ -30,7 +31,11 @@ export default {
 
     // Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     this.subscriptions = new CompositeDisposable();
-
+    this.modalView = new AnnotationModal({ content: "HEllo World"}, self);
+    this.modal = atom.workspace.addModalPanel({
+       item: this.modalView.getElement(),
+       visible: false
+     });
     // Register command that toggles this view
     this.subscriptions.add(atom.commands.add('atom-workspace', {
       'annotator:annotate_code': () => this.annotate_code()
@@ -246,7 +251,7 @@ export default {
   },
 
   submit_annotation(){
-    self = this
+    self = this;
     let editoR
     if (editoR = atom.workspace.getActiveTextEditor()){
         var range = editoR.getSelectedBufferRange();
@@ -254,7 +259,17 @@ export default {
         var lines = fs.readFileSync(editoR.getPath()).toString().split("\n");
         var path  = editoR.getPath();
         var lang  = storage.get_file_lang(path);
+        this.modal.show()
         atom.notifications.addInfo("Request:");
+    }
+  },
+
+  toogle_modal(){
+    if (this.modal.isVisible()) {
+      this.modal.hide();
+    }
+    else {
+      this.modal.show();
     }
   }
 

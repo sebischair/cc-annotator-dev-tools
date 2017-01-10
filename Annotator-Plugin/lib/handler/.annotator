@@ -1,0 +1,33 @@
+{
+  "projectId": "5834589c88695d217c1eed1a",
+  "annotated_files": [
+    {
+      "meta": {
+        "fileId": "5874ce79f18e900738551073",
+        "timeStamp": "2017-01-10 13:07:22.383",
+        "projectId": "5834589c88695d217c1eed1a",
+        "name": "annotation-modal.js",
+        "lang": "js",
+        "hash": "15b1b3bf6a5eabd1e923dfc0b337e76a167923a5202c171e30cc95e90ff4af4f"
+      },
+      "annotations": [
+        {
+          "begin": "130",
+          "end": "134",
+          "name": "Data",
+          "conceptType": "expertise",
+          "similarityScore": "100.0",
+          "token": "data",
+          "rows": [
+            6,
+            14,
+            29,
+            29
+          ]
+        }
+      ]
+    }
+  ],
+  "skipped_files": [],
+  "last_update": "2017-01-10 13:07:22.383"
+}
