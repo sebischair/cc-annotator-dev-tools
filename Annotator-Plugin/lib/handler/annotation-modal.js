@@ -78,6 +78,11 @@ module.exports = class AnnotationModal {
     this.additional_data = document.createElement('div');
     this.additional_data.classList.add('additional_data');
 
+    this.data_title = document.createElement('div');
+    this.data_title.classList.add('additional_data_title');
+    this.data_title.appendChild(document.createTextNode("Additional Information:"));
+    this.additional_data.appendChild(this.data_title);
+
     this.single_data = document.createElement('div');
     this.single_data.classList.add('data_container');
     this.data_title = document.createElement('label');
@@ -86,6 +91,26 @@ module.exports = class AnnotationModal {
     this.single_value = document.createElement('atom-text-editor');
     this.single_value.classList.add('editor');
     this.single_value.classList.add('mini');
+    this.single_value.classList.add('submit_descr');
+    this.single_data.appendChild(this.data_title);
+    this.single_data.appendChild(this.single_value);
+    this.additional_data.appendChild(this.single_data);
+
+    this.data_title = document.createElement('div');
+    this.data_title.classList.add('additional_data_user');
+    this.data_title.appendChild(document.createTextNode("User Information:"));
+    this.additional_data.appendChild(this.data_title);
+
+    this.single_data = document.createElement('div');
+    this.single_data.classList.add('data_container');
+    this.data_title = document.createElement('label');
+    this.data_title.classList.add('data_title');
+    this.data_title.appendChild(document.createTextNode("Name:"))
+    this.single_value = document.createElement('atom-text-editor');
+    this.single_value.classList.add('editor');
+    this.single_value.classList.add('mini');
+    this.single_value.classList.add('submit_name');
+    this.single_value.setAttribute("mini", "");
     this.single_data.appendChild(this.data_title);
     this.single_data.appendChild(this.single_value);
     this.additional_data.appendChild(this.single_data);
@@ -98,6 +123,8 @@ module.exports = class AnnotationModal {
     this.single_value = document.createElement('atom-text-editor');
     this.single_value.classList.add('editor');
     this.single_value.classList.add('mini');
+    this.single_value.classList.add('submit_mail');
+    this.single_value.setAttribute("mini", "");
     this.single_data.appendChild(this.data_title);
     this.single_data.appendChild(this.single_value);
     this.additional_data.appendChild(this.single_data);
@@ -127,14 +154,19 @@ module.exports = class AnnotationModal {
     this.modal_form.appendChild(this.modal_body);
     this.modal_form.appendChild(this.modal_footer);
 
-
   }
 
   submit() {
     modal.destroy();
 //    mail_elm = current_element.findChild();
-    console.log(current_element)
-    current_element.appendChild(document.createTextNode("TEDT"))
+    // Extract data from HTML
+    var mail_model = current_element.getElementsByClassName('submit_mail')[0].getModel()
+    var mail = mail_model.getText()
+    var name_model = current_element.getElementsByClassName('submit_name')[0].getModel()
+    var name = name_model.getText()
+    var description_model = current_element.getElementsByClassName('submit_descr')[0].getModel()
+    var description = description_model.getText()
+
     var data = {
       range: found_annotation.range,
       token: found_annotation.token,
@@ -143,12 +175,12 @@ module.exports = class AnnotationModal {
       lang: found_annotation.lang,
       code: found_annotation.code,
       user: {
-        name: "Dummy",
-        mail: "Dummy@hello.de"
+        name: name,
+        mail: mail
       },
-      description: "HERER"
+      description: description
     };
-    atom.notifications.addSuccess("Will send message!")
+    atom.notifications.addSuccess("Will send message: "+JSON.stringify(data))
     console.log(data);
   }
 
