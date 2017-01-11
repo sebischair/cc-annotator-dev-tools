@@ -11,7 +11,7 @@ module.exports =  {
           {
             headers: {
               'content-type' : 'application/json',
-              'Ocp-Apim-Subscription-Key' : '7f3435eadc484c32b084d406684a7b7a'
+              'Ocp-Apim-Subscription-Key' : ''
             },
             url: url,
             body: JSON.stringify(content)

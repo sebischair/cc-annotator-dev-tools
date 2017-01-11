@@ -40,20 +40,15 @@ export default {
     this.subscriptions.add(atom.commands.add('atom-workspace', {
       'annotator:annotate_code': () => this.annotate_code()
     }));
-    this.subscriptions.add(atom.commands.add('atom-workspace', {
+
+    /*this.subscriptions.add(atom.commands.add('atom-workspace', {
       'annotator:annotate_comment': () => this.annotate_comment()
-    }));
+    }));*/
     this.subscriptions.add(atom.commands.add('atom-workspace', {
       'annotator:submit_annotation': () => this.submit_annotation()
     }));
 
-    /**
-    this.side_pane = new PaneView();
-    this.side_pane.initialize("name", "line", "file", "vote", "line_content", "description");
-    this.side_pane.attach();/**/
-    //this.SidebarView = new SidebarView();
     this.SidebarView = new PaneView();
-    //this.SidebarView.attach();
 
     atom.notifications.addSuccess("Started Annotator Plugin")
   },

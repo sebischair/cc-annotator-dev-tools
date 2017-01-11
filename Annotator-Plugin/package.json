@@ -1,5 +1,5 @@
 {
-  "name": "Annotator",
+  "name": "cc-annotator",
   "main": "./lib/annotator",
   "version": "0.0.1",
   "description": "A short description of your package",
