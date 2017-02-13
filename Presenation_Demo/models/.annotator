@@ -1,0 +1,19 @@
+{
+    "projectId": "58a1da97f18e9013b087d18a",
+    "annotated_files": [
+        {
+            "meta": {
+                "fileId": "58a1e373f18e9013b087d1a6",
+                "timeStamp": "2017-02-13 17:48:52.03",
+                "projectId": "58a1da97f18e9013b087d18a",
+                "name": "User.js",
+                "lang": "js",
+                "hash": "aab20c5e8eddfbd98678c77dec2e147062cb369d9219c03019ee74991955284e"
+            },
+            "annotations": [],
+            "custom_annotations": []
+        }
+    ],
+    "skipped_files": [],
+    "last_update": "2017-02-13 17:48:52.03"
+}

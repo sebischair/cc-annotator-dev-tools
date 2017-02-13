@@ -1,0 +1,356 @@
+{
+    "projectId": "58a1da97f18e9013b087d18a",
+    "annotated_files": [
+        {
+            "meta": {
+                "fileId": "58a1da9cf18e9013b087d18b",
+                "timeStamp": "2017-02-13 17:11:08.424",
+                "projectId": "58a1da97f18e9013b087d18a",
+                "name": "contact.js",
+                "lang": "js",
+                "hash": "add199fefd612076deb3ba671db40c20cacc747f56dd07369c44d4294ae763ea"
+            },
+            "annotations": [
+                {
+                    "begin": "533",
+                    "end": "551",
+                    "name": "Equality",
+                    "token": "return value == 11",
+                    "tags": [
+                        "compare"
+                    ],
+                    "description": "Javascript has two options when it comes to comparing values the double equals == and the triple equals === operators. The difference between the two is that triple equals does type checking as well as value checking, so 1 === '1' would be false where as 1 == '1' would be true. In order to avoid nasty surprises we should try to use the === majority of the time since it helps us assert the types as well.",
+                    "rows": [
+                        28
+                    ]
+                },
+                {
+                    "begin": "599",
+                    "end": "620",
+                    "name": "Equality",
+                    "token": "return numString == 5",
+                    "tags": [
+                        "compare"
+                    ],
+                    "description": "Javascript has two options when it comes to comparing values the double equals == and the triple equals === operators. The difference between the two is that triple equals does type checking as well as value checking, so 1 === '1' would be false where as 1 == '1' would be true. In order to avoid nasty surprises we should try to use the === majority of the time since it helps us assert the types as well.",
+                    "rows": [
+                        32
+                    ]
+                },
+                {
+                    "begin": "741",
+                    "end": "756",
+                    "name": "this or that",
+                    "token": "var that = this",
+                    "tags": [
+                        "this",
+                        "smell"
+                    ],
+                    "description": "Assigning this to a variable is a general practive to maintain context in a function. This works but stinks and makes the code less recognizeable. Using constructs bind, call and apply to set context while calling a function is a more cleaner approach. Functions like forEach have a hidden parameter to set execution context.",
+                    "rows": [
+                        40
+                    ]
+                }
+            ],
+            "custom_annotations": [
+                {
+                    "id": "58a1de58f18e9013b087d196",
+                    "projectId": "58a1da97f18e9013b087d18a",
+                    "fileId": "0377f93ec6fa2892509f9ad86d2c0aedace978085bc6a37865828e10c700a528",
+                    "range": {
+                        "start": {
+                            "row": 21,
+                            "column": 4
+                        },
+                        "end": {
+                            "row": 24,
+                            "column": 19
+                        }
+                    },
+                    "token": "if(typeof test === 'number')\\n      return true;\\n    else\\n      return false;",
+                    "path": "/controllers/contact.js",
+                    "progLanguage": null,
+                    "description": "This code snippet can be replace with a single line return statement. The change will make the code shorter and easier to read.",
+                    "user": {
+                        "name": "Max-Philipp",
+                        "mail": "m.schrader@tum.de"
+                    },
+                    "createdAt": "Mon Feb 13 17:27:04 CET 2017",
+                    "tags": [
+                        "Purposeless condition"
+                    ]
+                },
+                {
+                    "id": "58a1df6df18e9013b087d19a",
+                    "projectId": "58a1da97f18e9013b087d18a",
+                    "fileId": "0377f93ec6fa2892509f9ad86d2c0aedace978085bc6a37865828e10c700a528",
+                    "range": {
+                        "start": {
+                            "row": 21,
+                            "column": 4
+                        },
+                        "end": {
+                            "row": 21,
+                            "column": 32
+                        }
+                    },
+                    "token": "if(typeof test === 'number')",
+                    "path": "/controllers/contact.js",
+                    "progLanguage": null,
+                    "description": "This condition can be directly the return statement.",
+                    "user": {
+                        "name": "Max-Philipp",
+                        "mail": "m.schrader@tum.de"
+                    },
+                    "createdAt": "Mon Feb 13 17:31:41 CET 2017",
+                    "tags": [
+                        "Purposeless condition"
+                    ]
+                }
+            ]
+        },
+        {
+            "meta": {
+                "fileId": "58a1dc9ef18e9013b087d18e",
+                "timeStamp": "2017-02-13 17:19:42.481",
+                "projectId": "58a1da97f18e9013b087d18a",
+                "name": "project.js",
+                "lang": "js",
+                "hash": "acde4de05cfde95349e958ad0f3e837d416eda8ce50473daa9a03f59792673b4"
+            },
+            "annotations": [
+                {
+                    "begin": "4232",
+                    "end": "4242",
+                    "name": "Hardcoded Sleep",
+                    "token": "sleep(102)",
+                    "tags": [
+                        "hardcoded"
+                    ],
+                    "description": "Hardcoded sleep.",
+                    "rows": [
+                        164
+                    ]
+                },
+                {
+                    "begin": "6032",
+                    "end": "6050",
+                    "name": "Equality",
+                    "token": "return value == 11",
+                    "tags": [
+                        "compare"
+                    ],
+                    "description": "Javascript has two options when it comes to comparing values the double equals == and the triple equals === operators. The difference between the two is that triple equals does type checking as well as value checking, so 1 === '1' would be false where as 1 == '1' would be true. In order to avoid nasty surprises we should try to use the === majority of the time since it helps us assert the types as well.",
+                    "rows": [
+                        234
+                    ]
+                },
+                {
+                    "begin": "6091",
+                    "end": "6108",
+                    "name": "Equality",
+                    "token": "return value == 7",
+                    "tags": [
+                        "compare"
+                    ],
+                    "description": "Javascript has two options when it comes to comparing values the double equals == and the triple equals === operators. The difference between the two is that triple equals does type checking as well as value checking, so 1 === '1' would be false where as 1 == '1' would be true. In order to avoid nasty surprises we should try to use the === majority of the time since it helps us assert the types as well.",
+                    "rows": [
+                        238
+                    ]
+                },
+                {
+                    "begin": "6462",
+                    "end": "6470",
+                    "name": "Hardcoded Sleep",
+                    "token": "sleep(5)",
+                    "tags": [
+                        "hardcoded"
+                    ],
+                    "description": "Hardcoded sleep.",
+                    "rows": [
+                        252
+                    ]
+                },
+                {
+                    "begin": "7656",
+                    "end": "7665",
+                    "name": "Hardcoded Sleep",
+                    "token": "sleep(15)",
+                    "tags": [
+                        "hardcoded"
+                    ],
+                    "description": "Hardcoded sleep.",
+                    "rows": [
+                        301
+                    ]
+                }
+            ],
+            "custom_annotations": [
+                {
+                    "id": "58a1dc99f18e9013b087d18d",
+                    "projectId": "58a1da97f18e9013b087d18a",
+                    "fileId": "0377f93ec6fa2892509f9ad86d2c0aedace978085bc6a37865828e10c700a528",
+                    "range": {
+                        "start": {
+                            "row": 199,
+                            "column": 12
+                        },
+                        "end": {
+                            "row": 199,
+                            "column": 133
+                        }
+                    },
+                    "token": "User.findByIdAndUpdate(req.body.userid, { $push: { \\likes\\: req.body.projectid }}, {safe: true, upsert: true, new : true}",
+                    "path": "/controllers/project.js",
+                    "progLanguage": null,
+                    "description": "Using mongoDB with a SQL like style is bad. MongoDB is not made to use forgein keys to merge data. Restructure the database to reduce the number of queries needed.",
+                    "user": {
+                        "name": "Max-Philipp",
+                        "mail": "m.schrader@tum.de"
+                    },
+                    "createdAt": "Mon Feb 13 17:19:37 CET 2017",
+                    "tags": [
+                        "Bad Join",
+                        "DB"
+                    ]
+                },
+                {
+                    "id": "58a1dd2cf18e9013b087d193",
+                    "projectId": "58a1da97f18e9013b087d18a",
+                    "fileId": "0377f93ec6fa2892509f9ad86d2c0aedace978085bc6a37865828e10c700a528",
+                    "range": {
+                        "start": {
+                            "row": 213,
+                            "column": 12
+                        },
+                        "end": {
+                            "row": 213,
+                            "column": 34
+                        }
+                    },
+                    "token": "User.findByIdAndUpdate",
+                    "path": "/controllers/project.js",
+                    "progLanguage": null,
+                    "description": "MongoDB is not made for manual joins. Restructure the DB design to reduce the number of querries.",
+                    "user": {
+                        "name": "Max-Philipp",
+                        "mail": "m.schrader@tum.de"
+                    },
+                    "createdAt": "Mon Feb 13 17:22:04 CET 2017",
+                    "tags": [
+                        "DB",
+                        "No manuall joins"
+                    ]
+                },
+                {
+                    "id": "58a1e5bef18e9013b087d1ad",
+                    "projectId": "58a1da97f18e9013b087d18a",
+                    "fileId": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "range": {
+                        "start": {
+                            "row": 308,
+                            "column": 40
+                        },
+                        "end": {
+                            "row": 308,
+                            "column": 98
+                        }
+                    },
+                    "token": " {\\cover\\: req.body.public_id}, {safe: true, upsert: true}",
+                    "path": "/controllers/project.js",
+                    "progLanguage": null,
+                    "description": "Extract parameters to variables outside the function call. This makes it easier to read the code.",
+                    "user": {
+                        "name": "Franz",
+                        "mail": "franz@huber.de"
+                    },
+                    "createdAt": "Mon Feb 13 17:58:38 CET 2017",
+                    "tags": [
+                        "Readability"
+                    ]
+                },
+                {
+                    "id": "58a1e625f18e9013b087d1af",
+                    "projectId": "58a1da97f18e9013b087d18a",
+                    "fileId": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+                    "range": {
+                        "start": {
+                            "row": 299,
+                            "column": 12
+                        },
+                        "end": {
+                            "row": 299,
+                            "column": 31
+                        }
+                    },
+                    "token": "console.log(model);",
+                    "path": "/controllers/project.js",
+                    "progLanguage": null,
+                    "description": "This print is totaly unneeded. Remove it to reduce the output of the code.",
+                    "user": {
+                        "name": "Franz",
+                        "mail": "franz@huber.de"
+                    },
+                    "createdAt": "Mon Feb 13 18:00:21 CET 2017",
+                    "tags": [
+                        "Unneeded print"
+                    ]
+                }
+            ]
+        },
+        {
+            "meta": {
+                "fileId": "58a1e2c3f18e9013b087d1a2",
+                "timeStamp": "2017-02-13 17:45:55.584",
+                "projectId": "58a1da97f18e9013b087d18a",
+                "name": "home.js",
+                "lang": "js",
+                "hash": "3e0e79201bf6fac3f1f993beec3510a5365e5087dbdb4eb4ace6358b2bd3a5f1"
+            },
+            "annotations": [
+                {
+                    "begin": "424",
+                    "end": "439",
+                    "name": "this or that",
+                    "token": "var that = this",
+                    "tags": [
+                        "this",
+                        "smell"
+                    ],
+                    "description": "Assigning this to a variable is a general practive to maintain context in a function. This works but stinks and makes the code less recognizeable. Using constructs bind, call and apply to set context while calling a function is a more cleaner approach. Functions like forEach have a hidden parameter to set execution context.",
+                    "rows": [
+                        19
+                    ]
+                },
+                {
+                    "begin": "443",
+                    "end": "461",
+                    "name": "Equality",
+                    "token": "return value == 11",
+                    "tags": [
+                        "compare"
+                    ],
+                    "description": "Javascript has two options when it comes to comparing values the double equals == and the triple equals === operators. The difference between the two is that triple equals does type checking as well as value checking, so 1 === '1' would be false where as 1 == '1' would be true. In order to avoid nasty surprises we should try to use the === majority of the time since it helps us assert the types as well.",
+                    "rows": [
+                        20
+                    ]
+                }
+            ],
+            "custom_annotations": []
+        },
+        {
+            "meta": {
+                "fileId": "58a1e36bf18e9013b087d1a4",
+                "timeStamp": "2017-02-13 17:48:43.277",
+                "projectId": "58a1da97f18e9013b087d18a",
+                "name": "event.js",
+                "lang": "js",
+                "hash": "c0a3271f94c46a0e21eb2a7292b303387882a5b36705fa44e3d787a3e19abf4a"
+            },
+            "annotations": [],
+            "custom_annotations": []
+        }
+    ],
+    "skipped_files": [],
+    "last_update": "2017-02-13 17:11:08.424"
+}
